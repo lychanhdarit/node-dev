@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Trang chủ</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="socket.io/socket.io.js"> </script>
+	<script>
+		var socket = io("http://192.168.0.150:8000");
+		 socket.on('Server-send-data', function (data) {
+			$("#list").append("<li>"+data+"</li>");
+		});
+		$(document).ready(function(){
+			$("#btn").click(()=>{
+				socket.emit('Client-send-data',$("#txtMessage").val());
+			});
+		});
+	</script>
+</head>
+<body> 
+<div >
+	<ul id="list">
+	
+	</ul>
+</div>
+<div>
+<input type="text" id="txtMessage" />
+<div id="btn">Send</div>
+</div>
+
+</body>
+</html>
